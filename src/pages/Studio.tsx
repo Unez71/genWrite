@@ -345,7 +345,7 @@ const Studio = () => {
 
           {/* Create Tab */}
           <TabsContent value="create" className="space-y-6">
-            <Card className="glass-effect border-white/10">
+            <Card className="glass-effect bg- border-white/10">
               <CardHeader>
                 <CardTitle className="text-white flex items-center">
                   <Sparkles className="w-5 h-5 mr-2 text-emerald-400" />
@@ -451,7 +451,7 @@ const Studio = () => {
                 // In your Card onClick handler, replace the openWork function with:
                 <Card 
                   key={work.id} 
-                  className="glass-effect border-white/10 hover:border-emerald-500/50 transition-colors cursor-pointer"
+                  className="glass-effect border-white/10 bg-primary/20 hover:border-emerald-500/50 transition-colors cursor-pointer"
                   onClick={() => navigate(`/work/${work.id}`)}
                 >
                   <CardHeader className="pb-2 sm:pb-4">
@@ -521,7 +521,7 @@ const Studio = () => {
             </div>
 
             {works.length === 0 && (
-              <Card className="glass-effect border-white/10 text-center py-8 sm:py-12">
+              <Card className="glass-effect border-white/10 bg- text-center py-8 sm:py-12">
                 <CardContent>
                   <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                   <h3 className="text-white text-lg font-semibold mb-2">No works yet</h3>
@@ -547,7 +547,7 @@ const Studio = () => {
               </Badge>
             </div>
 
-            <Card className="glass-effect border-white/10">
+            <Card className="glass-effect bg- border-white/10">
               <CardHeader>
                 <CardTitle className="text-white">Save New Prompt</CardTitle>
               </CardHeader>
@@ -608,7 +608,7 @@ const Studio = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {prompts.map((prompt) => (
-                <Card key={prompt.id} className="glass-effect border-white/10 hover:border-emerald-500/50 transition-colors">
+                <Card key={prompt.id} className="glass-effect bg-primary/20 border-white/10 hover:border-emerald-500/50 transition-colors">
                   <CardHeader className="pb-2 sm:pb-4">
                     <div className="flex items-center justify-between">
                       <Badge variant="outline" className="border-emerald-500/50 text-emerald-300">
@@ -648,7 +648,7 @@ const Studio = () => {
             </div>
             
             {prompts.length === 0 && (
-              <Card className="glass-effect border-white/10 text-center py-8 sm:py-12">
+              <Card className="glass-effect bg- border-white/10 text-center py-8 sm:py-12">
                 <CardContent>
                   <Lightbulb className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                   <h3 className="text-white text-lg font-semibold mb-2">No prompts yet</h3>

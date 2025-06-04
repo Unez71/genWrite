@@ -112,7 +112,7 @@ const Index = () => {
                 description: "Never face writer's block again with AI-powered prompts and creative suggestions."
               }
             ].map((feature, index) => (
-              <Card key={index} className="glass-effect border-white/10 hover-glow group">
+              <Card key={index} className="bg-black/10 hover-glow group">
                 <CardContent className="p-8">
                   <div className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg flex items-center justify-center mb-6 group-hover:animate-glow">
                     <feature.icon className="w-6 h-6 text-white" />

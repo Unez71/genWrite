@@ -56,7 +56,7 @@ const ViewWork = () => {
           Back to Studio
         </Button>
 
-        <Card className="glass-effect border-white/10">
+        <Card className="glass-effect bg- border-white/10">
           <CardHeader className="pb-2 sm:pb-4">
             <div className="flex items-center justify-between">
               <Badge variant="outline" className="border-emerald-500/50 text-emerald-300">
@@ -75,12 +75,12 @@ const ViewWork = () => {
             </div>
           </CardHeader>
           <CardContent className="prose prose-invert max-w-none">
-            {work.prompt && (
+            {/* {work.prompt && (
               <div className="mb-8 p-4 rounded-lg bg-white/5 border border-white/10">
                 <h3 className="text-sm font-semibold text-emerald-400 mb-2">Prompt</h3>
                 <p className="text-gray-300">{work.prompt}</p>
               </div>
-            )}
+            )} */}
             <div className="whitespace-pre-wrap text-gray-200">{work.content}</div>
           </CardContent>
         </Card>

@@ -144,7 +144,7 @@ const Auth = () => {
         </Link>
 
         {/* Auth Card */}
-        <Card className="glass-effect border-white/10 shadow-2xl">
+        <Card className="glass-effect bg- shadow-2xl">
           <CardHeader className="text-center space-y-4">
             <div className="flex items-center justify-center space-x-2">
               <div className="w-10 h-10 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg flex items-center justify-center">
