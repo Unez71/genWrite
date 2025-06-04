@@ -7,12 +7,12 @@ import { Link } from 'react-router-dom';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-emerald-900 to-slate-900">
       {/* Navigation */}
       <nav className="relative z-50 px-6 py-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg flex items-center justify-center">
               <Sparkles className="w-5 h-5 text-white" />
             </div>
             <h1 className="text-xl font-bold text-white">CreativeAI Studio</h1>
@@ -24,7 +24,7 @@ const Index = () => {
               </Button>
             </Link>
             <Link to="/auth">
-              <Button className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white">
+              <Button className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white">
                 Get Started
               </Button>
             </Link>
@@ -38,7 +38,7 @@ const Index = () => {
           <div className="animate-fade-in">
             <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 leading-tight">
               Create with
-              <span className="text-gradient bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent block">
+              <span className="text-gradient bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent block">
                 AI-Powered
               </span>
               Imagination
@@ -49,7 +49,7 @@ const Index = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link to="/studio">
-                <Button size="lg" className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white px-8 py-4 text-lg hover-glow">
+                <Button size="lg" className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white px-8 py-4 text-lg hover-glow">
                   Start Creating
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
@@ -62,10 +62,10 @@ const Index = () => {
           
           {/* Floating Elements */}
           <div className="absolute top-20 left-10 animate-float">
-            <div className="w-20 h-20 bg-gradient-to-r from-purple-500/20 to-blue-500/20 rounded-full blur-xl"></div>
+            <div className="w-20 h-20 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-full blur-xl"></div>
           </div>
           <div className="absolute top-40 right-20 animate-float" style={{ animationDelay: '1s' }}>
-            <div className="w-32 h-32 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-xl"></div>
+            <div className="w-32 h-32 bg-gradient-to-r from-teal-500/20 to-emerald-500/20 rounded-full blur-xl"></div>
           </div>
         </div>
       </section>
@@ -117,7 +117,7 @@ const Index = () => {
             ].map((feature, index) => (
               <Card key={index} className="glass-effect border-white/10 hover-glow group">
                 <CardContent className="p-8">
-                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg flex items-center justify-center mb-6 group-hover:animate-glow">
+                  <div className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg flex items-center justify-center mb-6 group-hover:animate-glow">
                     <feature.icon className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="text-xl font-semibold text-white mb-3">{feature.title}</h3>
@@ -140,7 +140,7 @@ const Index = () => {
               Join thousands of creators who are already using AI to enhance their storytelling and creative expression.
             </p>
             <Link to="/studio">
-              <Button size="lg" className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white px-10 py-4 text-lg hover-glow">
+              <Button size="lg" className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white px-10 py-4 text-lg hover-glow">
                 Start Your Creative Journey
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
@@ -153,7 +153,7 @@ const Index = () => {
       <footer className="px-6 py-12 border-t border-white/10">
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <div className="w-6 h-6 bg-gradient-to-r from-purple-500 to-blue-500 rounded flex items-center justify-center">
+            <div className="w-6 h-6 bg-gradient-to-r from-emerald-500 to-teal-500 rounded flex items-center justify-center">
               <Sparkles className="w-4 h-4 text-white" />
             </div>
             <span className="text-white font-semibold">CreativeAI Studio</span>
