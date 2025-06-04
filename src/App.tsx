@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Studio from "./pages/Studio";
 import NotFound from "./pages/NotFound";
+import ViewWork from '@/pages/ViewWork';
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/auth" element={<Auth />} />
           <Route path="/studio" element={<Studio />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/work/:id" element={<ViewWork />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

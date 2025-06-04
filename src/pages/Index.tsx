@@ -15,7 +15,7 @@ const Index = () => {
             <div className="w-8 h-8 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg flex items-center justify-center">
               <Sparkles className="w-5 h-5 text-white" />
             </div>
-            <h1 className="text-xl font-bold text-white">CreativeAI Studio</h1>
+            <h1 className="text-xl font-bold text-white">GenWrite</h1>
           </div>
           <div className="flex items-center space-x-4">
             <Link to="/auth">
@@ -44,7 +44,7 @@ const Index = () => {
               Imagination
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed">
-              Transform your ideas into captivating stories, poems, scripts, and more with the power of Google's Gemini AI. 
+              Transform your ideas into captivating stories, poems, scripts, and more. 
               Your creative partner for unlimited imagination.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -54,9 +54,6 @@ const Index = () => {
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
-              <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 px-8 py-4 text-lg">
-                Watch Demo
-              </Button>
             </div>
           </div>
           
@@ -156,10 +153,10 @@ const Index = () => {
             <div className="w-6 h-6 bg-gradient-to-r from-emerald-500 to-teal-500 rounded flex items-center justify-center">
               <Sparkles className="w-4 h-4 text-white" />
             </div>
-            <span className="text-white font-semibold">CreativeAI Studio</span>
+            <span className="text-white font-semibold">GenWrite</span>
           </div>
           <p className="text-gray-400">
-            Powered by Google Gemini AI • Built for Creators • Made with ❤️
+            Powered by Google Gemini AI • Built by Mohiddin • Made with ❤️
           </p>
         </div>
       </footer>

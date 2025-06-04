@@ -150,7 +150,7 @@ const Auth = () => {
               <div className="w-10 h-10 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg flex items-center justify-center">
                 <Sparkles className="w-6 h-6 text-white" />
               </div>
-              <h1 className="text-2xl font-bold text-white">CreativeAI Studio</h1>
+              <h1 className="text-2xl font-bold text-white">GenWrite</h1>
             </div>
             <p className="text-gray-300">Start your creative journey with AI</p>
           </CardHeader>

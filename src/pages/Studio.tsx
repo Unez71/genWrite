@@ -19,15 +19,26 @@ import {
   Trash2,
   Plus,
   LogOut,
-  User,
   FileText,
-  Lightbulb
+  Lightbulb,
+  User
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { geminiService, type GenerationOptions } from '@/services/geminiService';
 import type { User, Session } from '@supabase/supabase-js';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 interface CreativeWork {
   id: string;
@@ -288,35 +299,36 @@ const Studio = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-emerald-900 to-slate-900">
       {/* Header */}
-      <header className="border-b border-white/10 bg-black/20 backdrop-blur-lg">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <header className="border-b border-white/10 bg-black/20 backdrop-blur-lg sticky top-0 z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg flex items-center justify-center">
               <Sparkles className="w-5 h-5 text-white" />
             </div>
-            <h1 className="text-xl font-bold text-white">CreativeAI Studio</h1>
+            <h1 className="text-xl font-bold text-white">GenWrite</h1>
           </div>
-          <div className="flex items-center space-x-4">
-            <Badge variant="secondary" className="bg-emerald-500/20 text-emerald-300">
+          <div className="flex items-center space-x-2 sm:space-x-4">
+            <Badge variant="secondary" className="bg-emerald-500/20 text-emerald-300 hidden sm:flex">
               <User className="w-3 h-3 mr-1" />
-              {user.email}
+              {user?.email}
             </Badge>
             <Button
               onClick={handleSignOut}
               variant="ghost"
+              size="sm"
               className="text-white hover:bg-white/10"
             >
-              <LogOut className="w-4 h-4 mr-2" />
-              Sign Out
+              <LogOut className="w-4 h-4 sm:mr-2" />
+              <span className="hidden sm:inline">Sign Out</span>
             </Button>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
-          <TabsList className="bg-white/5 border border-white/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6 sm:space-y-8">
+          <TabsList className="bg-white/5 border border-white/10 w-full sm:w-auto overflow-x-auto overflow-hidden">
             <TabsTrigger value="create" className="text-white data-[state=active]:bg-white/10">
               <PenTool className="w-4 h-4 mr-2" />
               Create
@@ -358,10 +370,10 @@ const Studio = () => {
                       value={currentWork.type} 
                       onValueChange={(value) => setCurrentWork(prev => ({ ...prev, type: value as any }))}
                     >
-                      <SelectTrigger className="bg-white/5 border-white/10 text-white">
+                      <SelectTrigger id="type" className="bg-white/5 border-white/10 text-white">
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="bg-slate-800 border-white/10 text-white">
                         <SelectItem value="story">Story</SelectItem>
                         <SelectItem value="poem">Poem</SelectItem>
                         <SelectItem value="script">Script</SelectItem>
@@ -383,7 +395,7 @@ const Studio = () => {
                   <Button
                     onClick={generateContent}
                     disabled={isGenerating}
-                    className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600"
+                    className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 w-full sm:w-auto"
                   >
                     {isGenerating ? 'Generating...' : 'Generate with AI'}
                     <Sparkles className="w-4 h-4 ml-2" />
@@ -401,20 +413,20 @@ const Studio = () => {
                   />
                 </div>
 
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-0">
                   <div className="flex items-center space-x-2">
                     <input
                       type="checkbox"
                       id="public"
                       checked={currentWork.is_public}
                       onChange={(e) => setCurrentWork(prev => ({ ...prev, is_public: e.target.checked }))}
-                      className="rounded"
+                      className="rounded text-emerald-500 focus:ring-emerald-500"
                     />
                     <Label htmlFor="public" className="text-white">Make public</Label>
                   </div>
                   <Button
                     onClick={saveWork}
-                    className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600"
+                    className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 w-full sm:w-auto"
                   >
                     <Save className="w-4 h-4 mr-2" />
                     Save Work
@@ -433,10 +445,16 @@ const Studio = () => {
               </Badge>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {works.map((work) => (
-                <Card key={work.id} className="glass-effect border-white/10 hover:border-emerald-500/50 transition-colors">
-                  <CardHeader className="pb-4">
+                // Inside the works.map() section, replace the existing Card with:
+                // In your Card onClick handler, replace the openWork function with:
+                <Card 
+                  key={work.id} 
+                  className="glass-effect border-white/10 hover:border-emerald-500/50 transition-colors cursor-pointer"
+                  onClick={() => navigate(`/work/${work.id}`)}
+                >
+                  <CardHeader className="pb-2 sm:pb-4">
                     <div className="flex items-center justify-between">
                       <Badge variant="outline" className="border-emerald-500/50 text-emerald-300">
                         {work.type}
@@ -448,17 +466,47 @@ const Studio = () => {
                             Public
                           </Badge>
                         )}
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                          onClick={() => deleteWork(work.id)}
-                          className="text-red-400 hover:text-red-300 hover:bg-red-500/10"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
+                        <AlertDialog>
+                          <AlertDialogTrigger asChild>
+                            <Button
+                              size="sm"
+                              variant="ghost"
+                              className="text-red-400 hover:text-red-300 hover:bg-red-500/10"
+                              aria-label="Delete work"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
+                          </AlertDialogTrigger>
+                          <AlertDialogContent className="bg-slate-900 border-white/10">
+                            <AlertDialogHeader>
+                              <AlertDialogTitle className="text-white">Delete Work</AlertDialogTitle>
+                              <AlertDialogDescription className="text-gray-400">
+                                Are you sure you want to delete "{work.title}"? This action cannot be undone.
+                              </AlertDialogDescription>
+                            </AlertDialogHeader>
+                            <AlertDialogFooter>
+                              <AlertDialogCancel 
+                                onClick={(e) => e.stopPropagation()}
+                                className="bg-white/10 text-white hover:bg-white/20"
+                              >
+                                Cancel
+                              </AlertDialogCancel>
+                              <AlertDialogAction
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  deleteWork(work.id);
+                                }}
+                                className="bg-red-500 hover:bg-red-600 text-white"
+                              >
+                                Delete
+                              </AlertDialogAction>
+                            </AlertDialogFooter>
+                          </AlertDialogContent>
+                        </AlertDialog>
                       </div>
                     </div>
-                    <CardTitle className="text-white text-lg">{work.title}</CardTitle>
+                    <CardTitle className="text-white text-lg mt-2">{work.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-300 text-sm line-clamp-3 mb-4">
@@ -473,7 +521,7 @@ const Studio = () => {
             </div>
 
             {works.length === 0 && (
-              <Card className="glass-effect border-white/10 text-center py-12">
+              <Card className="glass-effect border-white/10 text-center py-8 sm:py-12">
                 <CardContent>
                   <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                   <h3 className="text-white text-lg font-semibold mb-2">No works yet</h3>
@@ -505,22 +553,31 @@ const Studio = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Input
-                    placeholder="Prompt title"
-                    className="bg-white/5 border-white/10 text-white placeholder:text-gray-400"
-                    id="prompt-title"
-                  />
-                  <Input
-                    placeholder="Category"
-                    className="bg-white/5 border-white/10 text-white placeholder:text-gray-400"
-                    id="prompt-category"
+                  <div className="space-y-2">
+                    <Label htmlFor="prompt-title" className="text-white">Title</Label>
+                    <Input
+                      id="prompt-title"
+                      placeholder="Prompt title"
+                      className="bg-white/5 border-white/10 text-white placeholder:text-gray-400"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="prompt-category" className="text-white">Category</Label>
+                    <Input
+                      id="prompt-category"
+                      placeholder="Category"
+                      className="bg-white/5 border-white/10 text-white placeholder:text-gray-400"
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="prompt-text" className="text-white">Prompt</Label>
+                  <Textarea
+                    id="prompt-text"
+                    placeholder="Enter your writing prompt..."
+                    className="bg-white/5 border-white/10 text-white placeholder:text-gray-400 min-h-[100px]"
                   />
                 </div>
-                <Textarea
-                  placeholder="Enter your writing prompt..."
-                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-400"
-                  id="prompt-text"
-                />
                 <Button
                   onClick={() => {
                     const title = (document.getElementById('prompt-title') as HTMLInputElement)?.value;
@@ -533,9 +590,15 @@ const Studio = () => {
                       (document.getElementById('prompt-title') as HTMLInputElement).value = '';
                       (document.getElementById('prompt-category') as HTMLInputElement).value = '';
                       (document.getElementById('prompt-text') as HTMLTextAreaElement).value = '';
+                    } else {
+                      toast({
+                        title: 'Error',
+                        description: 'Please fill in all fields',
+                        variant: 'destructive',
+                      });
                     }
                   }}
-                  className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600"
+                  className="bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 w-full sm:w-auto"
                 >
                   <Save className="w-4 h-4 mr-2" />
                   Save Prompt
@@ -543,10 +606,10 @@ const Studio = () => {
               </CardContent>
             </Card>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {prompts.map((prompt) => (
-                <Card key={prompt.id} className="glass-effect border-white/10">
-                  <CardHeader className="pb-4">
+                <Card key={prompt.id} className="glass-effect border-white/10 hover:border-emerald-500/50 transition-colors">
+                  <CardHeader className="pb-2 sm:pb-4">
                     <div className="flex items-center justify-between">
                       <Badge variant="outline" className="border-emerald-500/50 text-emerald-300">
                         {prompt.category}
@@ -555,7 +618,7 @@ const Studio = () => {
                         <Heart className="w-4 h-4 text-red-400" fill="currentColor" />
                       )}
                     </div>
-                    <CardTitle className="text-white text-lg">{prompt.title}</CardTitle>
+                    <CardTitle className="text-white text-lg mt-2">{prompt.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-300 text-sm mb-4">{prompt.prompt}</p>
@@ -569,6 +632,10 @@ const Studio = () => {
                         onClick={() => {
                           setCurrentWork(prev => ({ ...prev, prompt: prompt.prompt }));
                           setActiveTab('create');
+                          toast({
+                            title: 'Prompt selected',
+                            description: 'Prompt added to the create tab',
+                          });
                         }}
                         className="text-emerald-400 hover:text-emerald-300 hover:bg-emerald-500/10"
                       >
@@ -579,6 +646,16 @@ const Studio = () => {
                 </Card>
               ))}
             </div>
+            
+            {prompts.length === 0 && (
+              <Card className="glass-effect border-white/10 text-center py-8 sm:py-12">
+                <CardContent>
+                  <Lightbulb className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                  <h3 className="text-white text-lg font-semibold mb-2">No prompts yet</h3>
+                  <p className="text-gray-400 mb-4">Save your favorite writing prompts for later use</p>
+                </CardContent>
+              </Card>
+            )}
           </TabsContent>
         </Tabs>
       </div>
